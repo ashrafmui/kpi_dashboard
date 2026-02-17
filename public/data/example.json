@@ -1,0 +1,802 @@
+[
+  {
+    "start_time": "2025-11-13T10:49:55Z",
+    "end_time": "2025-11-13T12:53:36Z",
+    "id": 1,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 1213,
+      "energy": 9,
+      "Water": 167
+    },
+    "metrics": {
+      "time": 7421,
+      "energy": 999,
+      "Water": 2980
+    }
+  },
+  {
+    "start_time": "2025-11-13T12:55:38Z",
+    "end_time": "2025-11-13T13:48:27Z",
+    "id": 2,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 247,
+      "energy": 7,
+      "Water": 148
+    },
+    "metrics": {
+      "time": 3169,
+      "energy": 1193,
+      "Water": 2881
+    }
+  },
+  {
+    "start_time": "2025-11-13T13:57:35Z",
+    "end_time": "2025-11-13T14:41:25Z",
+    "id": 3,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 650,
+      "energy": 53,
+      "Water": 904
+    },
+    "metrics": {
+      "time": 2630,
+      "energy": 260,
+      "Water": 4599
+    }
+  },
+  {
+    "start_time": "2025-11-13T14:55:05Z",
+    "end_time": "2025-11-13T16:09:47Z",
+    "id": 4,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 823,
+      "energy": 32,
+      "Water": 577
+    },
+    "metrics": {
+      "time": 4482,
+      "energy": 783,
+      "Water": 1066
+    }
+  },
+  {
+    "start_time": "2025-11-14T13:33:21Z",
+    "end_time": "2025-11-14T15:06:06Z",
+    "id": 5,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 111,
+      "energy": 9,
+      "Water": 161
+    },
+    "metrics": {
+      "time": 5565,
+      "energy": 1827,
+      "Water": 2855
+    }
+  },
+  {
+    "start_time": "2025-11-14T16:47:32Z",
+    "end_time": "2025-11-14T18:02:01Z",
+    "id": 9,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 775,
+      "energy": 34,
+      "Water": 574
+    },
+    "metrics": {
+      "time": 4469,
+      "energy": 785,
+      "Water": 1046
+    }
+  },
+  {
+    "start_time": "2025-11-15T04:07:54Z",
+    "end_time": "2025-11-15T05:03:31Z",
+    "id": 10,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 109,
+      "energy": 5,
+      "Water": 111
+    },
+    "metrics": {
+      "time": 3337,
+      "energy": 1271,
+      "Water": 2870
+    }
+  },
+  {
+    "start_time": "2025-11-15T08:05:04Z",
+    "end_time": "2025-11-15T09:24:45Z",
+    "id": 11,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 706,
+      "energy": 30,
+      "Water": 481
+    },
+    "metrics": {
+      "time": 4781,
+      "energy": 846,
+      "Water": 2192
+    }
+  },
+  {
+    "start_time": "2025-11-16T06:35:16Z",
+    "end_time": "2025-11-16T07:25:48Z",
+    "id": 12,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 23,
+      "energy": 4,
+      "Water": 59
+    },
+    "metrics": {
+      "time": 3032,
+      "energy": 1122,
+      "Water": 2718
+    }
+  },
+  {
+    "start_time": "2025-11-16T07:29:16Z",
+    "end_time": "2025-11-16T07:51:36Z",
+    "id": 13,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 0,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 1340,
+      "energy": 147,
+      "Water": 2520
+    }
+  },
+  {
+    "start_time": "2025-11-16T07:58:32Z",
+    "end_time": "2025-11-16T09:13:13Z",
+    "id": 14,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 726,
+      "energy": 28,
+      "Water": 546
+    },
+    "metrics": {
+      "time": 4481,
+      "energy": 753,
+      "Water": 1023
+    }
+  },
+  {
+    "start_time": "2025-11-16T09:26:42Z",
+    "end_time": "2025-11-16T10:24:16Z",
+    "id": 15,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 21,
+      "energy": 1,
+      "Water": 16
+    },
+    "metrics": {
+      "time": 3454,
+      "energy": 993,
+      "Water": 3056
+    }
+  },
+  {
+    "start_time": "2025-11-16T10:59:12Z",
+    "end_time": "2025-11-16T11:47:35Z",
+    "id": 16,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 34,
+      "energy": 4,
+      "Water": 70
+    },
+    "metrics": {
+      "time": 2903,
+      "energy": 1132,
+      "Water": 2658
+    }
+  },
+  {
+    "start_time": "2025-11-16T12:44:25Z",
+    "end_time": "2025-11-16T14:13:23Z",
+    "id": 17,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 1092,
+      "energy": 8,
+      "Water": 171
+    },
+    "metrics": {
+      "time": 5338,
+      "energy": 985,
+      "Water": 3066
+    }
+  },
+  {
+    "start_time": "2025-11-16T14:15:23Z",
+    "end_time": "2025-11-16T15:04:42Z",
+    "id": 18,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 124,
+      "energy": 16,
+      "Water": 285
+    },
+    "metrics": {
+      "time": 2959,
+      "energy": 1151,
+      "Water": 2952
+    }
+  },
+  {
+    "start_time": "2025-11-16T16:11:08Z",
+    "end_time": "2025-11-16T16:33:39Z",
+    "id": 19,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 457,
+      "energy": 18,
+      "Water": 304
+    },
+    "metrics": {
+      "time": 1351,
+      "energy": 164,
+      "Water": 2806
+    }
+  },
+  {
+    "start_time": "2025-11-16T16:36:08Z",
+    "end_time": "2025-11-16T17:53:35Z",
+    "id": 20,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 815,
+      "energy": 33,
+      "Water": 549
+    },
+    "metrics": {
+      "time": 4647,
+      "energy": 800,
+      "Water": 1032
+    }
+  },
+  {
+    "start_time": "2025-11-17T19:02:27Z",
+    "end_time": "2025-11-17T21:14:53Z",
+    "id": 21,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 2061,
+      "energy": 4,
+      "Water": 84
+    },
+    "metrics": {
+      "time": 7946,
+      "energy": 1056,
+      "Water": 2627
+    }
+  },
+  {
+    "start_time": "2025-11-17T22:56:38Z",
+    "end_time": "2025-11-17T23:46:04Z",
+    "id": 22,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 118,
+      "energy": 11,
+      "Water": 240
+    },
+    "metrics": {
+      "time": 2966,
+      "energy": 1130,
+      "Water": 2834
+    }
+  },
+  {
+    "start_time": "2025-11-17T23:48:03Z",
+    "end_time": "2025-11-18T00:00:01Z",
+    "id": 23,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 0,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 718,
+      "energy": 76,
+      "Water": 1306
+    }
+  },
+  {
+    "start_time": "2025-11-11T21:53:00Z",
+    "end_time": "2025-11-11T22:50:42Z",
+    "id": 24,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 114,
+      "energy": 12,
+      "Water": 223
+    },
+    "metrics": {
+      "time": 3462,
+      "energy": 1326,
+      "Water": 2811
+    }
+  },
+  {
+    "start_time": "2025-11-12T08:20:21Z",
+    "end_time": "2025-11-12T08:51:07Z",
+    "id": 28,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 93,
+      "energy": 12,
+      "Water": 199
+    },
+    "metrics": {
+      "time": 1846,
+      "energy": 452,
+      "Water": 2634
+    }
+  },
+  {
+    "start_time": "2025-11-12T09:12:00Z",
+    "end_time": "2025-11-12T09:32:51Z",
+    "id": 29,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 11,
+      "energy": 2,
+      "Water": 31
+    },
+    "metrics": {
+      "time": 1251,
+      "energy": 454,
+      "Water": 2693
+    }
+  },
+  {
+    "start_time": "2025-11-12T09:35:34Z",
+    "end_time": "2025-11-12T09:51:38Z",
+    "id": 30,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 369,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 964,
+      "energy": 0,
+      "Water": null
+    }
+  },
+  {
+    "start_time": "2025-11-12T10:15:33Z",
+    "end_time": "2025-11-12T10:31:27Z",
+    "id": 31,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 136,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 954,
+      "energy": 0,
+      "Water": null
+    }
+  },
+  {
+    "start_time": "2025-10-24T00:47:17Z",
+    "end_time": "2025-10-24T02:50:58Z",
+    "id": 32,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 1120,
+      "energy": 8,
+      "Water": 147
+    },
+    "metrics": {
+      "time": 7957,
+      "energy": 1013,
+      "Water": 3061
+    }
+  },
+  {
+    "start_time": "2025-10-19T00:05:13Z",
+    "end_time": "2025-10-19T00:58:02Z",
+    "id": 33,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 227,
+      "energy": 7,
+      "Water": 151
+    },
+    "metrics": {
+      "time": 3374,
+      "energy": 1265,
+      "Water": 2811
+    }
+  },
+  {
+    "start_time": "2025-11-14T18:17:51Z",
+    "end_time": "2025-11-14T19:01:41Z",
+    "id": 34,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 722,
+      "energy": 57,
+      "Water": 812
+    },
+    "metrics": {
+      "time": 2569,
+      "energy": 243,
+      "Water": 4206
+    }
+  },
+  {
+    "start_time": "2025-11-07T03:05:24Z",
+    "end_time": "2025-11-07T04:20:06Z",
+    "id": 35,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 723,
+      "energy": 35,
+      "Water": 595
+    },
+    "metrics": {
+      "time": 4895,
+      "energy": 837,
+      "Water": 1078
+    }
+  },
+  {
+    "start_time": "2025-11-10T02:35:18Z",
+    "end_time": "2025-11-10T04:08:03Z",
+    "id": 36,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 122,
+      "energy": 9,
+      "Water": 178
+    },
+    "metrics": {
+      "time": 5694,
+      "energy": 1939,
+      "Water": 2466
+    }
+  },
+  {
+    "start_time": "2025-10-31T09:05:54Z",
+    "end_time": "2025-10-31T10:20:23Z",
+    "id": 37,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 713,
+      "energy": 30,
+      "Water": 536
+    },
+    "metrics": {
+      "time": 4651,
+      "energy": 753,
+      "Water": 1005
+    }
+  },
+  {
+    "start_time": "2025-10-30T21:17:44Z",
+    "end_time": "2025-10-30T22:13:21Z",
+    "id": 38,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 123,
+      "energy": 5,
+      "Water": 115
+    },
+    "metrics": {
+      "time": 3008,
+      "energy": 1358,
+      "Water": 2580
+    }
+  },
+  {
+    "start_time": "2025-11-10T08:59:40Z",
+    "end_time": "2025-11-10T10:19:21Z",
+    "id": 39,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 746,
+      "energy": 27,
+      "Water": 456
+    },
+    "metrics": {
+      "time": 5166,
+      "energy": 733,
+      "Water": 2404
+    }
+  },
+  {
+    "start_time": "2025-11-06T12:17:04Z",
+    "end_time": "2025-11-06T13:07:36Z",
+    "id": 40,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 21,
+      "energy": 5,
+      "Water": 66
+    },
+    "metrics": {
+      "time": 2863,
+      "energy": 1174,
+      "Water": 2633
+    }
+  },
+  {
+    "start_time": "2025-11-15T04:16:08Z",
+    "end_time": "2025-11-15T04:38:28Z",
+    "id": 41,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 0,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 1245,
+      "energy": 151,
+      "Water": 2821
+    }
+  },
+  {
+    "start_time": "2025-11-11T11:14:08Z",
+    "end_time": "2025-11-11T12:28:49Z",
+    "id": 42,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 728,
+      "energy": 25,
+      "Water": 472
+    },
+    "metrics": {
+      "time": 3956,
+      "energy": 782,
+      "Water": 1113
+    }
+  },
+  {
+    "start_time": "2025-11-13T19:04:24Z",
+    "end_time": "2025-11-13T20:01:58Z",
+    "id": 43,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 20,
+      "energy": 1,
+      "Water": 16
+    },
+    "metrics": {
+      "time": 3942,
+      "energy": 1100,
+      "Water": 2608
+    }
+  },
+  {
+    "start_time": "2025-10-24T21:56:34Z",
+    "end_time": "2025-10-24T22:44:57Z",
+    "id": 44,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 37,
+      "energy": 4,
+      "Water": 67
+    },
+    "metrics": {
+      "time": 2723,
+      "energy": 1016,
+      "Water": 2262
+    }
+  },
+  {
+    "start_time": "2025-11-02T16:48:11Z",
+    "end_time": "2025-11-02T18:17:09Z",
+    "id": 45,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 1095,
+      "energy": 7,
+      "Water": 177
+    },
+    "metrics": {
+      "time": 5885,
+      "energy": 987,
+      "Water": 2789
+    }
+  },
+  {
+    "start_time": "2025-11-09T05:34:49Z",
+    "end_time": "2025-11-09T06:24:08Z",
+    "id": 46,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 140,
+      "energy": 18,
+      "Water": 293
+    },
+    "metrics": {
+      "time": 2949,
+      "energy": 1017,
+      "Water": 2831
+    }
+  },
+  {
+    "start_time": "2025-11-05T07:03:15Z",
+    "end_time": "2025-11-05T07:25:46Z",
+    "id": 47,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 509,
+      "energy": 20,
+      "Water": 266
+    },
+    "metrics": {
+      "time": 1345,
+      "energy": 143,
+      "Water": 3025
+    }
+  },
+  {
+    "start_time": "2025-10-25T04:42:30Z",
+    "end_time": "2025-10-25T05:59:57Z",
+    "id": 48,
+    "tank_name": "Tank 4",
+    "savings": {
+      "time": 924,
+      "energy": 30,
+      "Water": 554
+    },
+    "metrics": {
+      "time": 4796,
+      "energy": 911,
+      "Water": 1165
+    }
+  },
+  {
+    "start_time": "2025-10-29T22:19:25Z",
+    "end_time": "2025-10-30T00:31:51Z",
+    "id": 49,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 2367,
+      "energy": 4,
+      "Water": 82
+    },
+    "metrics": {
+      "time": 7988,
+      "energy": 936,
+      "Water": 2410
+    }
+  },
+  {
+    "start_time": "2025-11-07T00:37:35Z",
+    "end_time": "2025-11-07T01:27:01Z",
+    "id": 50,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 108,
+      "energy": 10,
+      "Water": 209
+    },
+    "metrics": {
+      "time": 3083,
+      "energy": 1038,
+      "Water": 3179
+    }
+  },
+  {
+    "start_time": "2025-11-07T02:32:15Z",
+    "end_time": "2025-11-07T02:44:13Z",
+    "id": 51,
+    "tank_name": "Tank 3",
+    "savings": {
+      "time": 0,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 726,
+      "energy": 81,
+      "Water": 1456
+    }
+  },
+  {
+    "start_time": "2025-11-16T07:50:30Z",
+    "end_time": "2025-11-16T08:48:12Z",
+    "id": 52,
+    "tank_name": "Tank 2",
+    "savings": {
+      "time": 125,
+      "energy": 11,
+      "Water": 196
+    },
+    "metrics": {
+      "time": 3390,
+      "energy": 1296,
+      "Water": 2783
+    }
+  },
+  {
+    "start_time": "2025-10-20T21:41:41Z",
+    "end_time": "2025-10-20T22:12:27Z",
+    "id": 53,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 82,
+      "energy": 12,
+      "Water": 189
+    },
+    "metrics": {
+      "time": 2046,
+      "energy": 418,
+      "Water": 2389
+    }
+  },
+  {
+    "start_time": "2025-11-14T04:27:11Z",
+    "end_time": "2025-11-14T04:48:02Z",
+    "id": 54,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 10,
+      "energy": 2,
+      "Water": 35
+    },
+    "metrics": {
+      "time": 1230,
+      "energy": 503,
+      "Water": 2734
+    }
+  },
+  {
+    "start_time": "2025-10-20T20:34:53Z",
+    "end_time": "2025-10-20T20:50:57Z",
+    "id": 55,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 315,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 1037,
+      "energy": 0,
+      "Water": null
+    }
+  },
+  {
+    "start_time": "2025-11-12T15:30:13Z",
+    "end_time": "2025-11-12T15:46:07Z",
+    "id": 56,
+    "tank_name": "Tank 1",
+    "savings": {
+      "time": 151,
+      "energy": 0,
+      "Water": null
+    },
+    "metrics": {
+      "time": 858,
+      "energy": 0,
+      "Water": null
+    }
+  }
+]

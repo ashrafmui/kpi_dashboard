@@ -1,5 +1,19 @@
 This project is a dashboard for Laminar's spectroscopy sensors meant to display high level KPIs to customers as well as more detailed and robust views into the specifics of the savings in each tank based on the spectroscopy data. 
 
+## Architecture Decisions:
+
+Next.js is chosen as the framework for several reasons:
+
+- The App Router uses Server Components which process data transformation and heavy logic on the server side instead of on the client serving the webpage. This ensures faster loading times and logic is done on deployment rather than client side rendering.
+
+- Next.js organization of UI components also allows us to easily use components across pages. Next.js also interfaces well with ShadCN UI components making building faster and easier than building custom components for each usecase. 
+
+- Built-in backend layer via API serving 
+
+## Data Layer
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
