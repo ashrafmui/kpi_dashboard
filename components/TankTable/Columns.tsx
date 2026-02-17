@@ -26,6 +26,7 @@ export const columns: ColumnDef<TransformedTankRecord>[] = [
   {
     accessorKey: "date",
     header: sortableHeader("Date"),
+    filterFn: "dateRange" as any,
     cell: ({ row }) => {
       const d = row.original.startTime;
       return d.toLocaleDateString("en-US", {

@@ -46,6 +46,8 @@ export function DataTable<TData, TValue>({
     { id: "date", desc: true },
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
   const table = useReactTable({
     data,
@@ -56,12 +58,29 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     state: { sorting, columnFilters },
+    filterFns: {
+      dateRange: (row, columnId, filterValue) => {
+        const rowDate = (row.original as TransformedTankRecord).date;
+        const [from, to] = filterValue as [string, string];
+        if (from && rowDate < from) return false;
+        if (to && rowDate > to) return false;
+        return true;
+      },
+    },
   });
+
+  function updateDateFilter(from: string, to: string) {
+    setDateFrom(from);
+    setDateTo(to);
+    table.getColumn("date")?.setFilterValue(
+      from || to ? [from, to] : undefined
+    );
+  }
 
   return (
     <div className="space-y-4">
       {/* Filters */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-end">
         <Select
           onValueChange={(value) =>
             table
@@ -81,6 +100,26 @@ export function DataTable<TData, TValue>({
             ))}
           </SelectContent>
         </Select>
+
+        <div className="flex flex-col gap-1">
+          <label className="text-sm text-muted-foreground">From</label>
+          <Input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => updateDateFilter(e.target.value, dateTo)}
+            className="w-[160px]"
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="text-sm text-muted-foreground">To</label>
+          <Input
+            type="date"
+            value={dateTo}
+            onChange={(e) => updateDateFilter(dateFrom, e.target.value)}
+            className="w-[160px]"
+          />
+        </div>
       </div>
 
       {/* Table */}
