@@ -1,3 +1,5 @@
+This project is a dashboard for Laminar's spectroscopy sensors meant to display high level KPIs to customers as well as more detailed and robust views into the specifics of the savings in each tank based on the spectroscopy data. 
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
