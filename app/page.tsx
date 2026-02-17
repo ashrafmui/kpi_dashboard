@@ -1,11 +1,15 @@
 import { getTankData } from "@/lib/GetTankData";
 import { aggregateKPIs } from "@/lib/AggregateTanks";
 import { KPICard } from "@/components/KPICard";
-import { TankCard } from "@/components/TankCard";
+import { DataTable } from "@/components/TankTable/DataTable";
+import { columns } from "@/components/TankTable/Columns";
 
 export default async function DashboardPage() {
   const data = await getTankData();
   const kpis = aggregateKPIs(data);
+
+  // Extract unique tank names for the filter dropdown
+  const tankNames = [...new Set(data.map((r) => r.tankName))].sort();
 
   return (
     <main className="p-6 space-y-6">
@@ -46,11 +50,10 @@ export default async function DashboardPage() {
         />
       </div>
 
-      {/* Individual Tank Records */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.map((record) => (
-          <TankCard key={record.id} record={record} />
-        ))}
+      {/* Tank Records Table */}
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Cycle Records</h2>
+        <DataTable columns={columns} data={data} tankNames={tankNames} />
       </div>
     </main>
   );
