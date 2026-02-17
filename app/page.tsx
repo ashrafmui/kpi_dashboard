@@ -16,17 +16,17 @@ export default async function DashboardPage() {
         <KPICard
           title="Total Time Saved"
           value={`${(kpis.totalTimeSaved / 60).toFixed(1)} min`}
-          subtitle={`Across ${kpis.totalRecords} cycles`}
+          subtitle={`out of ${(kpis.totalTimeUsed / 60).toFixed(1)} min total`}
         />
         <KPICard
           title="Total Energy Saved"
           value={`${kpis.totalEnergySaved} kWh`}
-          subtitle={`Across ${kpis.totalRecords} cycles`}
+          subtitle={`out of ${kpis.totalEnergyUsed.toLocaleString()} kWh total · ~$${kpis.estimatedEnergyCostSaved} saved`}
         />
         <KPICard
           title="Total Water Saved"
-          value={`${kpis.totalWaterSaved} gal`}
-          subtitle={`From ${kpis.waterRecordCount} of ${kpis.totalRecords} cycles`}
+          value={`${kpis.totalWaterSaved.toLocaleString()} gal`}
+          subtitle={`out of ${kpis.totalWaterUsed.toLocaleString()} gal total · ~$${kpis.estimatedWaterCostSaved} saved`}
         />
       </div>
 
