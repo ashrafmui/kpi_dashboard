@@ -15,10 +15,13 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { TransformedTankRecord } from "@/lib/TransformTank";
+import { aggregateKPIs } from "@/lib/AggregateTanks";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -124,6 +127,39 @@ export function DataTable<TData, TValue>({
               </TableRow>
             )}
           </TableBody>
+          <TableFooter>
+            {(() => {
+              const rows = table.getFilteredRowModel().rows;
+              const records = rows.map(
+                (r) => r.original as TransformedTankRecord
+              );
+              const totals = aggregateKPIs(records);
+
+              return (
+                <TableRow className="font-semibold">
+                  <TableCell>Total ({rows.length})</TableCell>
+                  <TableCell />
+                  <TableCell />
+                  <TableCell>
+                    {(totals.totalTimeSaved / 60).toFixed(1)} min
+                  </TableCell>
+                  <TableCell>{totals.totalEnergySaved} kWh</TableCell>
+                  <TableCell>
+                    {totals.totalWaterSaved.toLocaleString()} gal
+                  </TableCell>
+                  <TableCell>
+                    {(totals.totalTimeUsed / 60).toFixed(1)} min
+                  </TableCell>
+                  <TableCell>
+                    {totals.totalEnergyUsed.toLocaleString()} kWh
+                  </TableCell>
+                  <TableCell>
+                    {totals.totalWaterUsed.toLocaleString()} gal
+                  </TableCell>
+                </TableRow>
+              );
+            })()}
+          </TableFooter>
         </Table>
       </div>
     </div>
