@@ -37,6 +37,28 @@ export const columns: ColumnDef<TransformedTankRecord>[] = [
     },
   },
   {
+    id: "startTime",
+    accessorFn: (row) => row.startTime.getTime(),
+    header: sortableHeader("Start Time"),
+    cell: ({ row }) => {
+      return row.original.startTime.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    },
+  },
+  {
+    id: "endTime",
+    accessorFn: (row) => row.endTime.getTime(),
+    header: sortableHeader("End Time"),
+    cell: ({ row }) => {
+      return row.original.endTime.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    },
+  },
+  {
     accessorKey: "durationMinutes",
     header: sortableHeader("Duration"),
     cell: ({ row }) => `${row.original.durationMinutes} min`,
