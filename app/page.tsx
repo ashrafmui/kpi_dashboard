@@ -3,12 +3,13 @@ import { aggregateKPIs } from "@/lib/AggregateTanks";
 import { KPICard } from "@/components/KPICard";
 import { DataTable } from "@/components/TankTable/DataTable";
 import { columns } from "@/components/TankTable/Columns";
+import { SavingsChart } from "@/components/SavingsChart";
+
 
 export default async function DashboardPage() {
   const data = await getTankData();
   const kpis = aggregateKPIs(data);
 
-  // Extract unique tank names for the filter dropdown
   const tankNames = [...new Set(data.map((r) => r.tankName))].sort();
 
   return (
@@ -20,17 +21,17 @@ export default async function DashboardPage() {
         <KPICard
           title="Total Time Saved"
           value={`${(kpis.totalTimeSaved / 60).toFixed(1)} min`}
-          subtitle={`out of ${(kpis.totalTimeUsed / 60).toFixed(1)} min total`}
+          subtitle={`out of ${(kpis.totalTimeUsed / 60).toFixed(1)} min total · ~${(kpis.projectedYearlyTimeSaved / 3600).toFixed(0)} hrs/yr projected`}
         />
         <KPICard
           title="Total Energy Saved"
           value={`${kpis.totalEnergySaved} kWh`}
-          subtitle={`out of ${kpis.totalEnergyUsed.toLocaleString()} kWh total · ~$${kpis.estimatedEnergyCostSaved} saved`}
+          subtitle={`out of ${kpis.totalEnergyUsed.toLocaleString()} kWh total · ~${kpis.projectedYearlyEnergySaved.toLocaleString()} kWh/yr (~$${kpis.projectedYearlyEnergyCost})`}
         />
         <KPICard
           title="Total Water Saved"
           value={`${kpis.totalWaterSaved.toLocaleString()} gal`}
-          subtitle={`out of ${kpis.totalWaterUsed.toLocaleString()} gal total · ~$${kpis.estimatedWaterCostSaved} saved`}
+          subtitle={`out of ${kpis.totalWaterUsed.toLocaleString()} gal total · ~${kpis.projectedYearlyWaterSaved.toLocaleString()} gal/yr (~$${kpis.projectedYearlyWaterCost})`}
         />
       </div>
 
@@ -49,6 +50,9 @@ export default async function DashboardPage() {
           value={`${kpis.avgWaterSaved.toFixed(1)} gal`}
         />
       </div>
+
+      {/* Savings Trend Chart */}
+      <SavingsChart data={data} tankNames={tankNames} kpis={kpis} />
 
       {/* Tank Records Table */}
       <div>

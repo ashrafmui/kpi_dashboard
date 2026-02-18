@@ -1,27 +1,95 @@
 import { TransformedTankRecord } from "./TransformTank";
 
-export interface KPISummary {
-  totalTimeSaved: number;
-  totalEnergySaved: number;
-  totalWaterSaved: number;
-  totalTimeUsed: number;
-  totalEnergyUsed: number;
-  totalWaterUsed: number;
-  avgTimeSaved: number;
-  avgEnergySaved: number;
-  avgWaterSaved: number;
-  // estimated cost savings
-  estimatedEnergyCostSaved: number;
-  estimatedWaterCostSaved: number;
-  // how many records had valid water data
-  waterRecordCount: number;
-  totalRecords: number;
-}
-
 // US average utility rates
 // In production, these would be configurable per customer/region
 const ENERGY_RATE_PER_KWH = 0.13; // $/kWh
 const WATER_RATE_PER_GAL = 0.005; // $/gal
+
+// ── Daily per-tank breakdown (used by charts) ──
+
+export type SavingsMetric = "time" | "energy" | "water";
+
+export interface DailyTankData {
+  date: string;
+  tank1: number;
+  tank2: number;
+  tank3: number;
+  tank4: number;
+}
+
+const tankKeyMap: Record<string, keyof Omit<DailyTankData, "date">> = {
+  "Tank 1": "tank1",
+  "Tank 2": "tank2",
+  "Tank 3": "tank3",
+  "Tank 4": "tank4",
+};
+
+export function aggregateByDay(
+  records: TransformedTankRecord[],
+  metric: SavingsMetric
+): DailyTankData[] {
+    const sorted = [...records].sort(
+    (a, b) => a.startTime.getTime() - b.startTime.getTime()
+    );
+
+    // Find date range
+    const earliest = sorted[0].startTime;
+    const latest = sorted[sorted.length - 1].startTime;
+
+    // Build a map with every day in range initialized to 0
+    const byDate = new Map<string, DailyTankData>();
+    const current = new Date(earliest);
+    current.setUTCHours(0, 0, 0, 0);
+    const end = new Date(latest);
+    end.setUTCHours(0, 0, 0, 0);
+
+    while (current <= end) {
+    const dateKey = current.toISOString().split("T")[0];
+    byDate.set(dateKey, {
+        date: dateKey,
+        tank1: 0,
+        tank2: 0,
+        tank3: 0,
+        tank4: 0,
+    });
+    current.setUTCDate(current.getUTCDate() + 1);
+    }
+
+    // Fill in actual values
+    for (const r of sorted) {
+        const dateKey = r.startTime.toISOString().split("T")[0];
+        const point = byDate.get(dateKey)!;
+        const value = r.savings[metric] ?? 0;
+        const key = tankKeyMap[r.tankName];
+        if (key) point[key] += value;
+    }
+
+    return Array.from(byDate.values());
+}
+
+// ── KPI summary (used by KPI cards and chart header totals) ──
+
+export interface KPISummary {
+    totalTimeSaved: number;
+    totalEnergySaved: number;
+    totalWaterSaved: number;
+    totalTimeUsed: number;
+    totalEnergyUsed: number;
+    totalWaterUsed: number;
+    avgTimeSaved: number;
+    avgEnergySaved: number;
+    avgWaterSaved: number;
+    estimatedEnergyCostSaved: number;
+    estimatedWaterCostSaved: number;
+    projectedYearlyTimeSaved: number;
+    projectedYearlyEnergySaved: number;
+    projectedYearlyWaterSaved: number;
+    projectedYearlyEnergyCost: number;
+    projectedYearlyWaterCost: number;
+    waterRecordCount: number;
+    totalRecords: number;
+    dateRangeDays: number;
+}
 
 export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
   let totalTimeSaved = 0;
@@ -47,6 +115,22 @@ export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
 
   const totalRecords = records.length;
 
+  const dates = records.map((r) => r.startTime.getTime());
+  const earliestMs = Math.min(...dates);
+  const latestMs = Math.max(...dates);
+  const dateRangeDays = Math.max(
+    (latestMs - earliestMs) / (1000 * 60 * 60 * 24),
+    1
+  );
+  const yearMultiplier = 365 / dateRangeDays;
+
+  const estimatedEnergyCostSaved = parseFloat(
+    (totalEnergySaved * ENERGY_RATE_PER_KWH).toFixed(2)
+  );
+  const estimatedWaterCostSaved = parseFloat(
+    (totalWaterSaved * WATER_RATE_PER_GAL).toFixed(2)
+  );
+
   return {
     totalTimeSaved,
     totalEnergySaved,
@@ -57,13 +141,27 @@ export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
     avgTimeSaved: totalRecords > 0 ? totalTimeSaved / totalRecords : 0,
     avgEnergySaved: totalRecords > 0 ? totalEnergySaved / totalRecords : 0,
     avgWaterSaved: waterRecordCount > 0 ? totalWaterSaved / waterRecordCount : 0,
-    estimatedEnergyCostSaved: parseFloat(
-      (totalEnergySaved * ENERGY_RATE_PER_KWH).toFixed(2)
+    estimatedEnergyCostSaved,
+    estimatedWaterCostSaved,
+    projectedYearlyTimeSaved: Math.round(totalTimeSaved * yearMultiplier),
+    projectedYearlyEnergySaved: Math.round(totalEnergySaved * yearMultiplier),
+    projectedYearlyWaterSaved: Math.round(totalWaterSaved * yearMultiplier),
+    projectedYearlyEnergyCost: parseFloat(
+      (estimatedEnergyCostSaved * yearMultiplier).toFixed(2)
     ),
-    estimatedWaterCostSaved: parseFloat(
-      (totalWaterSaved * WATER_RATE_PER_GAL).toFixed(2)
+    projectedYearlyWaterCost: parseFloat(
+      (estimatedWaterCostSaved * yearMultiplier).toFixed(2)
     ),
     waterRecordCount,
     totalRecords,
+    dateRangeDays: Math.round(dateRangeDays),
   };
 }
+
+// ── Shared constants ──
+
+export const metricUnits: Record<SavingsMetric, string> = {
+  time: "s",
+  energy: "kWh",
+  water: "gal",
+};
