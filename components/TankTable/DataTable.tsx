@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/table";
 import { TransformedTankRecord } from "@/lib/TransformTank";
 import { aggregateKPIs } from "@/lib/AggregateTanks";
+import { CycleModal } from "@/components/CycleModal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -33,6 +34,9 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([
     { id: "date", desc: true },
   ]);
+  const [selectedRecord, setSelectedRecord] =
+    useState<TransformedTankRecord | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const table = useReactTable({
     data,
@@ -44,81 +48,98 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
-                  </TableCell>
+    <>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
                 ))}
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={columns.length}
-                className="h-24 text-center"
-              >
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-        <TableFooter>
-          {(() => {
-            const records = data as unknown as TransformedTankRecord[];
-            const totals = aggregateKPIs(records);
-
-            return (
-              <TableRow className="font-semibold">
-                <TableCell>Total ({records.length})</TableCell>
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell>
-                  {(totals.totalTimeSaved / 60).toFixed(1)} min
-                </TableCell>
-                <TableCell>{totals.totalEnergySaved} kWh</TableCell>
-                <TableCell>
-                  {totals.totalWaterSaved.toLocaleString()} gal
-                </TableCell>
-                <TableCell>
-                  {(totals.totalTimeUsed / 60).toFixed(1)} min
-                </TableCell>
-                <TableCell>
-                  {totals.totalEnergyUsed.toLocaleString()} kWh
-                </TableCell>
-                <TableCell>
-                  {totals.totalWaterUsed.toLocaleString()} gal
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  className="cursor-pointer hover:bg-muted/50"
+                  onClick={() => {
+                    setSelectedRecord(
+                      row.original as unknown as TransformedTankRecord
+                    );
+                    setModalOpen(true);
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
                 </TableCell>
               </TableRow>
-            );
-          })()}
-        </TableFooter>
-      </Table>
-    </div>
+            )}
+          </TableBody>
+          <TableFooter>
+            {(() => {
+              const records = data as unknown as TransformedTankRecord[];
+              const totals = aggregateKPIs(records);
+
+              return (
+                <TableRow className="font-semibold">
+                  <TableCell>Total ({records.length})</TableCell>
+                  <TableCell />
+                  <TableCell />
+                  <TableCell />
+                  <TableCell>
+                    {(totals.totalTimeSaved / 60).toFixed(1)} min
+                  </TableCell>
+                  <TableCell>{totals.totalEnergySaved} kWh</TableCell>
+                  <TableCell>
+                    {totals.totalWaterSaved.toLocaleString()} gal
+                  </TableCell>
+                  <TableCell>
+                    {(totals.totalTimeUsed / 60).toFixed(1)} min
+                  </TableCell>
+                  <TableCell>
+                    {totals.totalEnergyUsed.toLocaleString()} kWh
+                  </TableCell>
+                  <TableCell>
+                    {totals.totalWaterUsed.toLocaleString()} gal
+                  </TableCell>
+                </TableRow>
+              );
+            })()}
+          </TableFooter>
+        </Table>
+      </div>
+
+      <CycleModal
+        record={selectedRecord}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
+    </>
   );
 }
