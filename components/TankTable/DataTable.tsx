@@ -98,7 +98,6 @@ export function DataTable<TData, TValue>({
                 <TableCell />
                 <TableCell />
                 <TableCell />
-                <TableCell />
                 <TableCell>
                   {(totals.totalTimeSaved / 60).toFixed(1)} min
                 </TableCell>

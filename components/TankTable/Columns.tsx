@@ -59,11 +59,6 @@ export const columns: ColumnDef<TransformedTankRecord>[] = [
     },
   },
   {
-    accessorKey: "durationMinutes",
-    header: sortableHeader("Duration"),
-    cell: ({ row }) => `${row.original.durationMinutes} min`,
-  },
-  {
     id: "savingsTime",
     accessorFn: (row) => row.savings.time,
     header: sortableHeader("Time Saved"),
@@ -87,7 +82,7 @@ export const columns: ColumnDef<TransformedTankRecord>[] = [
   {
     id: "metricsTime",
     accessorFn: (row) => row.metrics.time,
-    header: sortableHeader("Time Used"),
+    header: sortableHeader("Process Time"),
     cell: ({ row }) => `${(row.original.metrics.time / 60).toFixed(1)} min`,
   },
   {
