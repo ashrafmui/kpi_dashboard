@@ -89,6 +89,9 @@ export interface KPISummary {
     waterRecordCount: number;
     totalRecords: number;
     dateRangeDays: number;
+    topTimeSaver: { tank: string; value: number };
+    topEnergySaver: { tank: string; value: number };
+    topWaterSaver: { tank: string; value: number };
 }
 
 export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
@@ -131,6 +134,25 @@ export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
     (totalWaterSaved * WATER_RATE_PER_GAL).toFixed(2)
   );
 
+  const tankSavings: Record<string, { time: number; energy: number; water: number }> = {};
+  for (const r of records) {
+    const name = r.tankName;
+    if (!tankSavings[name]) tankSavings[name] = { time: 0, energy: 0, water: 0 };
+    tankSavings[name].time += r.savings.time;
+    tankSavings[name].energy += r.savings.energy;
+    tankSavings[name].water += r.savings.water ?? 0;
+  }
+
+  function topSaver(metric: "time" | "energy" | "water") {
+    let best = { tank: "N/A", value: 0 };
+    for (const [tank, savings] of Object.entries(tankSavings)) {
+      if (savings[metric] > best.value) {
+        best = { tank, value: savings[metric] };
+      }
+    }
+    return best;
+  }
+
   return {
     totalTimeSaved,
     totalEnergySaved,
@@ -155,6 +177,9 @@ export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
     waterRecordCount,
     totalRecords,
     dateRangeDays: Math.round(dateRangeDays),
+    topTimeSaver: topSaver("time"),
+    topEnergySaver: topSaver("energy"),
+    topWaterSaver: topSaver("water"),
   };
 }
 

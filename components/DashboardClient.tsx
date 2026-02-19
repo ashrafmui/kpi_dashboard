@@ -147,6 +147,26 @@ export function DashboardClient({ data }: DashboardClientProps) {
         />
       </div>
 
+    {selectedTank == "all" &&
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <KPICard
+            title="Top Time Saver"
+            value={kpis.topTimeSaver.tank}
+            subtitle={`${(kpis.topTimeSaver.value / 60).toFixed(1)} min saved`}
+            />
+            <KPICard
+            title="Top Energy Saver"
+            value={kpis.topEnergySaver.tank}
+            subtitle={`${kpis.topEnergySaver.value} kWh saved`}
+            />
+            <KPICard
+            title="Top Water Saver"
+            value={kpis.topWaterSaver.tank}
+            subtitle={`${kpis.topWaterSaver.value.toLocaleString()} gal saved`}
+            />
+        </div>
+    }
+
       {/* Savings Trend Chart */}
       <SavingsChart data={filteredData} tankNames={tankNames} kpis={kpis} />
 
