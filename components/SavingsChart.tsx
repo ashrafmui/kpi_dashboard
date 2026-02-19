@@ -71,6 +71,20 @@ export function SavingsChart({ data, tankNames, kpis }: SavingsChartProps) {
     [data, activeMetric]
   );
 
+  // Only show lines for tanks that exist in the filtered data
+  const activeTankKeys = useMemo(() => {
+    const present = new Set(data.map((r) => r.tankName));
+    return TANK_KEYS.filter((key) => {
+      const nameMap: Record<string, string> = {
+        tank1: "Tank 1",
+        tank2: "Tank 2",
+        tank3: "Tank 3",
+        tank4: "Tank 4",
+      };
+      return present.has(nameMap[key]);
+    });
+  }, [data]);
+
   return (
     <Card className="py-4 sm:py-0">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
@@ -138,7 +152,7 @@ export function SavingsChart({ data, tankNames, kpis }: SavingsChartProps) {
                 />
               }
             />
-            {TANK_KEYS.map((key) => (
+            {activeTankKeys.map((key) => (
               <Line
                 key={key}
                 type="monotone"
