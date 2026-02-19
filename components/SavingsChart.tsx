@@ -26,19 +26,19 @@ import {
 const chartConfig = {
   tank1: {
     label: "Tank 1",
-    color: "var(--chart-1)",
+    color: "#2563eb",
   },
   tank2: {
     label: "Tank 2",
-    color: "var(--chart-2)",
+    color: "#16a34a",
   },
   tank3: {
     label: "Tank 3",
-    color: "var(--chart-3)",
+    color: "#ea580c",
   },
   tank4: {
     label: "Tank 4",
-    color: "var(--chart-4)",
+    color: "#9333ea",
   },
 } satisfies ChartConfig;
 

@@ -28,70 +28,70 @@ export function aggregateByDay(
   records: TransformedTankRecord[],
   metric: SavingsMetric
 ): DailyTankData[] {
-    const sorted = [...records].sort(
+  const sorted = [...records].sort(
     (a, b) => a.startTime.getTime() - b.startTime.getTime()
-    );
+  );
 
-    // Find date range
-    const earliest = sorted[0].startTime;
-    const latest = sorted[sorted.length - 1].startTime;
+  // Find date range
+  const earliest = sorted[0].startTime;
+  const latest = sorted[sorted.length - 1].startTime;
 
-    // Build a map with every day in range initialized to 0
-    const byDate = new Map<string, DailyTankData>();
-    const current = new Date(earliest);
-    current.setUTCHours(0, 0, 0, 0);
-    const end = new Date(latest);
-    end.setUTCHours(0, 0, 0, 0);
+  // Build a map with every day in range initialized to 0
+  const byDate = new Map<string, DailyTankData>();
+  const current = new Date(earliest);
+  current.setUTCHours(0, 0, 0, 0);
+  const end = new Date(latest);
+  end.setUTCHours(0, 0, 0, 0);
 
-    while (current <= end) {
+  while (current <= end) {
     const dateKey = current.toISOString().split("T")[0];
     byDate.set(dateKey, {
-        date: dateKey,
-        tank1: 0,
-        tank2: 0,
-        tank3: 0,
-        tank4: 0,
+      date: dateKey,
+      tank1: 0,
+      tank2: 0,
+      tank3: 0,
+      tank4: 0,
     });
     current.setUTCDate(current.getUTCDate() + 1);
-    }
+  }
 
-    // Fill in actual values
-    for (const r of sorted) {
-        const dateKey = r.startTime.toISOString().split("T")[0];
-        const point = byDate.get(dateKey)!;
-        const value = r.savings[metric] ?? 0;
-        const key = tankKeyMap[r.tankName];
-        if (key) point[key] += value;
-    }
+  // Fill in actual values
+  for (const r of sorted) {
+    const dateKey = r.startTime.toISOString().split("T")[0];
+    const point = byDate.get(dateKey)!;
+    const value = r.savings[metric] ?? 0;
+    const key = tankKeyMap[r.tankName];
+        if (key) point[key] += value;  }
 
-    return Array.from(byDate.values());
+  return Array.from(byDate.values());
 }
 
 // ── KPI summary (used by KPI cards and chart header totals) ──
 
 export interface KPISummary {
-    totalTimeSaved: number;
-    totalEnergySaved: number;
-    totalWaterSaved: number;
-    totalTimeUsed: number;
-    totalEnergyUsed: number;
-    totalWaterUsed: number;
-    avgTimeSaved: number;
-    avgEnergySaved: number;
-    avgWaterSaved: number;
-    estimatedEnergyCostSaved: number;
-    estimatedWaterCostSaved: number;
-    projectedYearlyTimeSaved: number;
-    projectedYearlyEnergySaved: number;
-    projectedYearlyWaterSaved: number;
-    projectedYearlyEnergyCost: number;
-    projectedYearlyWaterCost: number;
-    waterRecordCount: number;
-    totalRecords: number;
-    dateRangeDays: number;
-    topTimeSaver: { tank: string; value: number };
-    topEnergySaver: { tank: string; value: number };
-    topWaterSaver: { tank: string; value: number };
+  totalTimeSaved: number;
+  totalEnergySaved: number;
+  totalWaterSaved: number;
+  totalTimeUsed: number;
+  totalEnergyUsed: number;
+  totalWaterUsed: number;
+  avgTimeSaved: number;
+  avgEnergySaved: number;
+  avgWaterSaved: number;
+  estimatedEnergyCostSaved: number;
+  estimatedWaterCostSaved: number;
+  projectedYearlyTimeSaved: number;
+  projectedYearlyEnergySaved: number;
+  projectedYearlyWaterSaved: number;
+  projectedYearlyEnergyCost: number;
+  projectedYearlyWaterCost: number;
+  waterRecordCount: number;
+  totalRecords: number;
+  dateRangeDays: number;
+  // top savers per metric
+  topTimeSaver: { tank: string; value: number };
+  topEnergySaver: { tank: string; value: number };
+  topWaterSaver: { tank: string; value: number };
 }
 
 export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
@@ -134,6 +134,7 @@ export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
     (totalWaterSaved * WATER_RATE_PER_GAL).toFixed(2)
   );
 
+  // Find top saver per metric by tank
   const tankSavings: Record<string, { time: number; energy: number; water: number }> = {};
   for (const r of records) {
     const name = r.tankName;
@@ -181,6 +182,51 @@ export function aggregateKPIs(records: TransformedTankRecord[]): KPISummary {
     topEnergySaver: topSaver("energy"),
     topWaterSaver: topSaver("water"),
   };
+}
+
+// ── Baseline vs Actual comparison (used by comparison chart) ──
+
+export interface ComparisonDataPoint {
+  date: string;
+  actual: number;
+  baseline: number;
+}
+
+export function aggregateComparison(
+  records: TransformedTankRecord[],
+  metric: SavingsMetric
+): ComparisonDataPoint[] {
+  const sorted = [...records].sort(
+    (a, b) => a.startTime.getTime() - b.startTime.getTime()
+  );
+
+  if (sorted.length === 0) return [];
+
+  const earliest = sorted[0].startTime;
+  const latest = sorted[sorted.length - 1].startTime;
+
+  const byDate = new Map<string, ComparisonDataPoint>();
+  const current = new Date(earliest);
+  current.setUTCHours(0, 0, 0, 0);
+  const end = new Date(latest);
+  end.setUTCHours(0, 0, 0, 0);
+
+  while (current <= end) {
+    const dateKey = current.toISOString().split("T")[0];
+    byDate.set(dateKey, { date: dateKey, actual: 0, baseline: 0 });
+    current.setUTCDate(current.getUTCDate() + 1);
+  }
+
+  for (const r of sorted) {
+    const dateKey = r.startTime.toISOString().split("T")[0];
+    const point = byDate.get(dateKey)!;
+    const metricVal = r.metrics[metric] ?? 0;
+    const savingsVal = r.savings[metric] ?? 0;
+    point.actual += metricVal;
+    point.baseline += metricVal + savingsVal;
+  }
+
+  return Array.from(byDate.values());
 }
 
 // ── Shared constants ──

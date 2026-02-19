@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { ComparisonChart } from "@/components/ComparisonChart";
 
 interface DashboardClientProps {
   data: TransformedTankRecord[];
@@ -169,6 +170,8 @@ export function DashboardClient({ data }: DashboardClientProps) {
 
       {/* Savings Trend Chart */}
       <SavingsChart data={filteredData} tankNames={tankNames} kpis={kpis} />
+
+      <ComparisonChart data={filteredData} kpis={kpis} />
 
       {/* Tank Records Table */}
       <div>
