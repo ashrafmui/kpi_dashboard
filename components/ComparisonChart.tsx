@@ -18,7 +18,6 @@ import {
 import { TransformedTankRecord } from "@/lib/TransformTank";
 import {
   aggregateComparison,
-  metricUnits,
   KPISummary,
   SavingsMetric,
 } from "@/lib/AggregateTanks";

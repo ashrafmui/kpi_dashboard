@@ -1,11 +1,8 @@
 import { TransformedTankRecord } from "./TransformTank";
 
 // US average utility rates
-// In production, these would be configurable per customer/region
 const ENERGY_RATE_PER_KWH = 0.13; // $/kWh
 const WATER_RATE_PER_GAL = 0.005; // $/gal
-
-// ── Daily per-tank breakdown (used by charts) ──
 
 export type SavingsMetric = "time" | "energy" | "water";
 
