@@ -27,7 +27,8 @@ export function aggregateByDay(
 ): DailyTankData[] {
   const sorted = [...records].sort(
     (a, b) => a.startTime.getTime() - b.startTime.getTime()
-  );
+  ); if (sorted.length === 0) return [];
+
 
   // Find date range
   const earliest = sorted[0].startTime;
@@ -63,7 +64,7 @@ export function aggregateByDay(
   return Array.from(byDate.values());
 }
 
-// ── KPI summary (used by KPI cards and chart header totals) ──
+// KPI summary (used by KPI cards and chart header totals)
 
 export interface KPISummary {
   totalTimeSaved: number;

@@ -17,16 +17,6 @@ export interface TransformedTankRecord {
     energy: number;
     water: number | null;
   };
-  // derived: savings as a percentage of metrics
-  savingsPercent: {
-    time: number;
-    energy: number;
-    water: number | null;
-  };
-}
-
-function calcPercent(saved: number, total: number): number {
-  return total === 0 ? 0 : Math.round((saved / total) * 100);
 }
 
 export function transformRecord(raw: TankRecord): TransformedTankRecord {
@@ -54,14 +44,6 @@ export function transformRecord(raw: TankRecord): TransformedTankRecord {
     date: start.toISOString().split("T")[0],
     savings,
     metrics,
-    savingsPercent: {
-      time: calcPercent(savings.time, metrics.time),
-      energy: calcPercent(savings.energy, metrics.energy),
-      water:
-        savings.water !== null && metrics.water !== null
-          ? calcPercent(savings.water, metrics.water)
-          : null,
-    },
   };
 }
 

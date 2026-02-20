@@ -108,7 +108,7 @@ kpi_dashboard/
 ### Installation
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ashrafmui/kpi_dashboard.git
 cd kpi_dashboard
 npm install
 ```

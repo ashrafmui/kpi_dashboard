@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import { TransformedTankRecord } from "@/lib/TransformTank";
 import {
   aggregateKPIs,
-  KPISummary,
 } from "@/lib/AggregateTanks";
 import { KPICard } from "@/components/KPICard";
 import { SavingsChart } from "@/components/SavingsChart";
